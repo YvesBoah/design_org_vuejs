@@ -1,0 +1,55 @@
+<template>
+    <div class="Ticket_vue">
+
+ <div class="content-wrapper">
+                    <h1 class="text-center">Liste des Tickets Générer</h1>
+       <div class="container">
+           <div class="row">
+               <div class="col-xs-12 col-lg-8 col-lg-push-2">
+                     <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Data Table With Full Features</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Rendering engine</th>
+                  <th>Browser</th>
+                  <th>Platform(s)</th>
+                  <th>Engine version</th>
+                  <th>CSS grade</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr>
+                  <td>Misc</td>
+                  <td>Lynx</td>
+                  <td>Text only</td>
+                  <td>-</td>
+                  <td>X</td>
+                </tr>
+                
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Rendering engine</th>
+                  <th>Browser</th>
+                  <th>Platform(s)</th>
+                  <th>Engine version</th>
+                  <th>CSS grade</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+               </div>
+           </div>
+       </div>
+
+</div>
+    </div>
+</template>
