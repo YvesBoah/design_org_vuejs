@@ -114,6 +114,7 @@
               <li><router-link :to="{name:'Eventhot'}"><i class="fa fa-circle-o"></i> Créer Un évènement</router-link></li>
               <li><router-link :to="{name:'Ticket'}"><i class="fa fa-circle-o"></i> Générer un ticket</router-link></li>
               <li><router-link :to="{name:'Profil'}"><i class="fa fa-circle-o"></i> Modifier Son Profil </router-link></li>
+              <li><router-link :to="{name:'Typeticket'}"><i class="fa fa-circle-o"></i> Créer Un Nouveau Type </router-link></li>
             </ul>
           </li>
 
@@ -124,6 +125,7 @@
             <ul class="treeview-menu">
               <li class="active"><router-link :to="{name:'Event_vue'}"><i class="fa fa-circle-o"></i>Liste des évènements</router-link></li>
               <li><router-link :to="{name:'Ticket_vue'}"><i class="fa fa-circle-o"></i> Liste Des tickets Générer</router-link></li>
+              <li><router-link :to="{name:'TypeticketVue'}"><i class="fa fa-circle-o"></i> Liste Des types de ticket </router-link></li>
               <li><router-link :to="{name:'Statistique'}"><i class="fa fa-circle-o"></i> Statistique Comptabilité </router-link></li>
             </ul>
           </li>   

@@ -35,7 +35,7 @@
                   <label class="col-sm-2 control-label">Status</label>
 
                    <div class="col-sm-10">
-                <select v-model="Ticket.status" name="status" class="form-control select2" style="width: 100%;">
+                <select v-model="Ticket.statut" name="statut" class="form-control select2" style="width: 100%;">
                   <option value="En attentes" selected="selected"> En attentes</option>
                   <option value="Actif">Actif</option>
                 </select>
@@ -66,16 +66,18 @@
               </div> -->
               <!-- /.form group -->
 
-            
+  <!-- content -->
+
                 <div class="form-group">
                 <label class="col-sm-2 control-label">évenement liées</label>
                 <div class="col-sm-10">
                 <select v-model="Ticket.event_id" name="event_id" class="form-control select2" style="width: 100%;">
-                  <option value="" selected="selected">event 1</option>
-                  <option value="">event 2</option>
+                  <option  v-for="item in eventLier" :key="item.id" >{{item.libelle}}</option> 
                 </select>
               </div>
               </div>
+
+      
 
               </div>
               <!-- /.box-body -->
@@ -95,11 +97,13 @@
 </template>
 
 <script>
+
 export default {
   name: 'Ticket',
   data () {
     return {
-        Ticket: {}
+        Ticket: {},
+        eventLier: []
     }
   },
   methods: {
@@ -110,23 +114,38 @@ export default {
               let newTicket = {
                   qte : this.Ticket.qte,
                   event_id : this.Ticket.event_id,
-                  status : this.Ticket.status,
+                  statut : this.Ticket.statut,
                   type_ticket_id : this.Ticket.type_ticket_id,
                   prix : this.Ticket.prix,
               }
 
               this.$http.post('http://192.168.1.100:3333/ticket/create',newTicket)
               .then(function(response){
+                console.log(response);
                   // this.$router.push({path: '/'});
+                  // if (response.msg != 'ok'){
+                  //   alert('ERREUR');
+                  // }
               });
 
               
-              alert('envoie reussie');
+              console.log('envoie reussie');
               e.preventDefault();
           }
           e.preventDefault();
           
+      },
+      fetchEventLier() {
+        this.$http.get('http://192.168.1.101:3333/event/index')
+            .then(function(response){
+              this.eventLier = response.body.data
+               console.log(response.body.data)
+          })
       }
+  },
+  created: function() {
+    this.fetchEventLier();
   }
 }
+
 </script>

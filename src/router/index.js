@@ -9,6 +9,10 @@ import Vendeur from '@/components/Vendeur'
 import Event_vue from '@/components/Event_vue'
 import Ticket_vue from '@/components/Ticket_vue'
 import Eventhot from '@/components/Eventhot'
+import Typeticket from '@/components/Typeticket'
+import TypeticketVue from '@/components/TypeticketVue'
+import UpdateTypeTicket from '@/components/UpdateTypeTicket'
+import EventModify from '@/components/EventModify'
 
 Vue.use(Router)
 
@@ -63,6 +67,26 @@ export default new Router({
       path: '/Ticket_vue',
       name: 'Ticket_vue',
       component: Ticket_vue
+    },
+    {
+      path: '/Typeticket',
+      name: 'Typeticket',
+      component: Typeticket
+    },
+    {
+      path: '/TypeticketVue',
+      name: 'TypeticketVue',
+      component: TypeticketVue
+    },
+    {
+      path: '/UpdateTypeTicket/:id',
+      name: 'UpdateTypeTicket',
+      component: UpdateTypeTicket
+    },
+    {
+      path: '/EventModify/:id',
+      name: 'EventModify',
+      component: EventModify
     }
   ]
 })
