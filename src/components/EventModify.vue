@@ -5,7 +5,7 @@
       <div class="container">
           <div class="row">
               <h1 class="text-center">Formulaire de Modification d'évènement </h1>
-              <div class="col-xs-12 col-lg-6 col-lg-push-3">
+              <div class="col-xs-12 col-lg-8 col-lg-push-1">
                     <!-- form start -->
             <form class="form-horizontal" v-on:submit.prevent="UpdateEvent">
 
@@ -14,7 +14,7 @@
                   <label  class="col-sm-2 control-label">Libellé</label>
 
                   <div class="col-sm-10">
-                    <input type="text" name="libelle" v-model="Eventhot.libelle" class="form-control" placeholder="Libellé">
+                    <input type="text" name="libelle" v-model="EventModify.libelle" class="form-control" placeholder="Libellé">
                   </div>
                 </div>
 
@@ -23,7 +23,7 @@
                   <label class="col-sm-2 control-label">Description</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control"  v-model="Eventhot.description" name="description" placeholder="Description">
+                    <input type="text" class="form-control"  v-model="EventModify.description" name="description" placeholder="Description">
                   </div>
                 </div>
 
@@ -41,7 +41,7 @@
                   <label class="col-sm-2 control-label">Lieu de l'évènement </label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="Eventhot.lieu"  name="lieu"  placeholder="Lieu de l'évènement">
+                    <input type="text" class="form-control" v-model="EventModify.lieu"  name="lieu"  placeholder="Lieu de l'évènement">
                   </div>
                 </div>
 
@@ -53,7 +53,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="date" v-model="Eventhot.date_debut" name="date_debut" class="form-control pull-right">
+                  <input type="date" v-model="EventModify.date_debut" name="date_debut" class="form-control pull-right">
                 </div>
                 </div>
               </div>
@@ -67,7 +67,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div> 
-                  <input type="date" v-model="Eventhot.date_fin" name="date_fin" class="form-control pull-right">
+                  <input type="date" v-model="EventModify.date_fin" name="date_fin" class="form-control pull-right">
                 </div>
                 </div>
               </div>
@@ -77,7 +77,7 @@
                 <div class="form-group">
                 <label class="col-sm-2 control-label">Type</label>
                 <div class="col-sm-10">
-                <select v-model="Eventhot.type" name="type" class="form-control select2" style="width: 100%;" required>
+                <select v-model="EventModify.type" name="type" class="form-control select2" style="width: 100%;" required>
                   <option name="type" value="Public" selected>Public</option>
                   <option name="type" value="Priver">Privé</option>
                 </select>
@@ -105,35 +105,62 @@ export default {
   name: 'EventModify',
   data () {
     return {
-        Eventhot: {}
+        EventModify: {
+          libelle:'',
+          id:0,
+          description:'',
+          lieu:'',
+          date_debut:'',
+          date_fin:'',
+          type:''
+          }
     }
   },
   methods: {
       UpdateEvent(e){
-          if (this.Eventhot.libelle =='' || !this.Eventhot.description || !this.Eventhot.lieu) {
+          if (this.EventModify.libelle =='' || !this.EventModify.description || !this.EventModify.lieu) {
               console.log('veuillez remplir les champs svp');
           } else {
-              let newEvent = {
-                  libelle : this.Eventhot.libelle,
-                  description : this.Eventhot.description,
-                  lieu : this.Eventhot.lieu,
-                  date_debut : this.Eventhot.date_debut,
-                  date_fin : this.Eventhot.date_fin,
-                  type : this.Eventhot.type
+              let UpdateEvents = {
+                  libelle : this.EventModify.libelle,
+                  description : this.EventModify.description,
+                  lieu : this.EventModify.lieu,
+                  date_debut : this.EventModify.date_debut,
+                  date_fin : this.EventModify.date_fin,
+                  type : this.EventModify.type
               }
 
-              this.$http.post('http://192.168.1.100:3333/event/create',newEvent)
+              this.$http.post('http://192.168.1.100:3333/event/update/'+this.EventModify.id,UpdateEvents)
               .then(function(response){
+                console.log(response)
                   this.$router.push({path: '/'});
               });
 
               
-              console.log('envoie reussie');
+              // console.log('envoie reussie');
               e.preventDefault();
           }
           e.preventDefault();
           
+      },
+      fetchEvent(id) {
+        this.$http.get('http://192.168.1.100:3333/event/edit/'+id)
+            .then(function(response){
+              this.EventModify.libelle=response.body.data.libelle
+              this.EventModify.description=response.body.data.description
+              this.EventModify.lieu=response.body.data.lieu
+              this.EventModify.date_debut=response.body.data.date_debut
+              this.EventModify.libelle=response.body.data.libelle
+              this.EventModify.date_fin=response.body.data.date_fin
+              this.EventModify.type=response.body.data.type
+               this.EventModify.id=response.body.data.id
+               console.log(response.body.data)
+          })
       }
-  }
+  },
+  created: function() {
+      this.fetchEvent(this.$route.params.id);
+      this.UpdateEvent(this.$route.params.id);
+      }
 }
 </script>

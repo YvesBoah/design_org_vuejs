@@ -17,7 +17,7 @@
                 <tr>
                   <th>Id</th>
                   <th>Libellé</th>
-                  <th>Modifier</th>
+                  <th>Modification</th>
                   <th>Suppression</th>
                 </tr>
                 </thead>
@@ -26,8 +26,8 @@
                 <tr v-for="item in TypeTicket" :key="item.id">
                   <td>{{item.id}}</td>
                   <td >{{item.libelle}}</td>
-                <th><router-link :to="{name:'UpdateTypeTicket', params: {id: item.id}}">Modifier</router-link></th>
-                  <td>-</td>
+                <th><router-link :to="{name:'UpdateTypeTicket', params: {id: item.id}}"><button class="btn btn-primary">Modifier</button></router-link></th>
+                  <td><button v-on:click="DeleteType(item.id)" class="btn btn-danger">Supprimer</button></td>
                 </tr>
                 
                 </tbody>
@@ -56,15 +56,24 @@ export default {
   },
   methods: {
       fetchTypeTicket() {
-        this.$http.get('http://192.168.1.101:3333/typeTicket/index')
+        this.$http.get('http://192.168.1.100:3333/typeTicket/index')
             .then(function(response){
               this.TypeTicket = response.body.data
                console.log(response.body.data)
-          })
-      }
+          });
+      },
+    DeleteType(id){
+        this.$http.get('http://192.168.1.100:3333/typeTicket/delete/'+id)
+            .then(function(response){
+              this.TypeTicket = response.body.data
+              //  this.$router.push({path:'/'});
+               location.reload()
+          });
+    }
+
   },
   created: function() {
-    this.fetchTypeTicket();
+    this.fetchTypeTicket(this.$route.params.id);
   }
 }
 

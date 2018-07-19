@@ -26,7 +26,9 @@
                    <div class="col-sm-10">
                 <select v-model="Ticket.prix" name="prix" class="form-control select2" style="width: 100%;">
                   <option value="5000" selected="selected">5000 FCFA</option>
-                  <option value="10000">10000 FCFA</option>
+                  <option value="10000">15000 FCFA</option>
+                  <option value="10000">20000 FCFA</option>
+                  <option value="10000">25000 FCFA</option>
                 </select>
               </div>
                 </div>
@@ -47,8 +49,7 @@
 
                    <div class="col-sm-10">
                 <select v-model="Ticket.type_ticket_id" name="type_ticket_id" class="form-control select2" style="width: 100%;">
-                  <option value="public" selected="selected">public</option>
-                  <option value="privée">privée</option>
+                  <option v-for="items in TypeLier" :key="items.id" selected="selected" v-bind:value="items.id">{{items.libelle}}</option>
                 </select>
               </div>
                 </div>
@@ -72,7 +73,7 @@
                 <label class="col-sm-2 control-label">évenement liées</label>
                 <div class="col-sm-10">
                 <select v-model="Ticket.event_id" name="event_id" class="form-control select2" style="width: 100%;">
-                  <option  v-for="item in eventLier" :key="item.id" >{{item.libelle}}</option> 
+                  <option  v-for="item in eventLier" :key="item.id" v-bind:value="item.id">{{item.libelle}}</option> 
                 </select>
               </div>
               </div>
@@ -103,7 +104,8 @@ export default {
   data () {
     return {
         Ticket: {},
-        eventLier: []
+        eventLier: [],
+        TypeLier: []
     }
   },
   methods: {
@@ -116,7 +118,7 @@ export default {
                   event_id : this.Ticket.event_id,
                   statut : this.Ticket.statut,
                   type_ticket_id : this.Ticket.type_ticket_id,
-                  prix : this.Ticket.prix,
+                  prix : this.Ticket.prix
               }
 
               this.$http.post('http://192.168.1.100:3333/ticket/create',newTicket)
@@ -136,15 +138,25 @@ export default {
           
       },
       fetchEventLier() {
-        this.$http.get('http://192.168.1.101:3333/event/index')
+        this.$http.get('http://192.168.1.100:3333/event/index')
             .then(function(response){
+              // this.eventLier = response.body.data.libelle
               this.eventLier = response.body.data
+               console.log(response.body.data)
+          })
+      },
+      fetchTypeLier() {
+        this.$http.get('http://192.168.1.100:3333/typeTicket/index')
+            .then(function(response){
+              //this.TypeLier = response.body.data.type
+              this.TypeLier = response.body.data
                console.log(response.body.data)
           })
       }
   },
   created: function() {
     this.fetchEventLier();
+    this.fetchTypeLier();
   }
 }
 

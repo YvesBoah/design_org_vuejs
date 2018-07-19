@@ -5,43 +5,43 @@
                     <h1 class="text-center">Liste des Tickets Générer</h1>
        <div class="container">
            <div class="row">
-               <div class="col-xs-12 col-lg-8 col-lg-push-2">
+               <div class="col-xs-12 col-lg-10 col-lg-push-0">
                      <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
+                  <th>Id</th>
+                  <th>Libellé</th>
+                  <th>description</th>
+                  <th>Lieu</th>
+                  <th>date_debut</th>
+                  <th>date_fin</th>
+                  <th>Type</th>
+                  <th>Modification</th>
+                  <th>Suppression</th>
                 </tr>
                 </thead>
                 <tbody>
                 
-                <tr>
-                  <td>Misc</td>
-                  <td>Lynx</td>
-                  <td>Text only</td>
-                  <td>-</td>
-                  <td>X</td>
+                <tr v-for="item in VueEvents" :key="item.id">
+                  <td>{{item.id}}</td>
+                  <td >{{item.libelle}}</td>
+                  <td >{{item.description}}</td>
+                  <td >{{item.lieu}}</td>
+                  <td >{{item.date_debut}}</td>
+                  <td >{{item.date_fin}}</td>
+                  <td >{{item.type}}</td>
+                <th><router-link :to="{name:'EventModify', params: {id: item.id}}"><button class="btn btn-primary">Modifier</button></router-link></th>
+                  <td><button v-on:click="DeleteEvent(item.id)" class="btn btn-danger">Supprimer</button></td>
                 </tr>
                 
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
-                </tr>
-                </tfoot>
+               
               </table>
             </div>
             <!-- /.box-body -->

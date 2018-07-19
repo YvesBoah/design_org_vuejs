@@ -40,8 +40,7 @@ export default {
   name: 'UpdateTypeTicket',
   data () {
     return {
-        TicketUpdate: {libelle:'',id:0},
-        Type: []
+        TicketUpdate: {libelle:'',id:0}
     }
   },
   methods: {
@@ -53,7 +52,7 @@ export default {
                   libelle : this.TicketUpdate.libelle    
               }
 
-              this.$http.post('http://192.168.1.101:3333/typeTicket/update/'+this.TicketUpdate.id,UpdateThisTicket)
+              this.$http.post('http://192.168.1.100:3333/typeTicket/update/'+this.TicketUpdate.id,UpdateThisTicket)
               .then(function(response){
                   this.$router.push({path: '/'});
               });
@@ -66,9 +65,8 @@ export default {
           
       },
       fetchType(id) {
-        this.$http.get('http://192.168.1.101:3333/typeTicket/edit/'+id)
+        this.$http.get('http://192.168.1.100:3333/typeTicket/edit/'+id)
             .then(function(response){
-              this.eventLier = response.body.data
               this.TicketUpdate.libelle=response.body.data.libelle
               this.TicketUpdate.id=id
                console.log(response.body.data)
