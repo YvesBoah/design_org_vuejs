@@ -1,14 +1,14 @@
 <template>
-    <div class="Ticket">
+    <div class="UpdateTicket">
       
          <div class="content-wrapper">
 
       <div class="container">
           <div class="row">
-              <h1 class="text-center">Formulaire de création de Ticket</h1>
+              <h1 class="text-center">Formulaire de Modification du Ticket</h1>
               <div class="col-xs-12 col-lg-6 col-lg-push-3">
                     <!-- form start -->
-            <form class="form-horizontal" v-on:submit.prevent="addTicket">
+            <form class="form-horizontal" v-on:submit.prevent="UpdateEvent">
 
               <div class="box-body">
 
@@ -98,50 +98,67 @@
 </template>
 
 <script>
-
 export default {
-  name: 'Ticket',
+  name: 'UpdateTicket',
   data () {
     return {
-        Ticket: {},
         eventLier: [],
-        TypeLier: []
+        TypeLier: [],
+        Ticket: {
+          statut:'',
+          qte:1,
+          id:0,
+          statut:'',
+          prix:'',
+          type_ticket_id:'',
+          event_id:''
+          }
     }
   },
   methods: {
-      addTicket(e){
-          if (1==0) {
-              alert('veuillez remplir les champs svp');
+      UpdateEvent(e){
+          if (!this.Ticket.statut  || !this.Ticket.qte || !this.Ticket.prix) {
+              console.log('veuillez remplir les champs svp');
           } else {
-              let newTicket = {
-                  qte : this.Ticket.qte,
-                  event_id : this.Ticket.event_id,
+              let UpdateEvents = {
                   statut : this.Ticket.statut,
+                  qte : this.Ticket.qte,
+                  id : this.Ticket.id,
+                  prix : this.Ticket.prix,
                   type_ticket_id : this.Ticket.type_ticket_id,
-                  prix : this.Ticket.prix
+                  event_id : this.Ticket.event_id
               }
 
-              this.$http.post('http://192.168.1.100:3333/ticket/create',newTicket)
+              this.$http.post('http://192.168.1.100:3333/ticket/update/'+this.Ticket.id,UpdateEvents)
               .then(function(response){
-                console.log(response);
-                  // this.$router.push({path: '/'});
-                  // if (response.msg != 'ok'){
-                  //   alert('ERREUR');
-                  // }
+                console.log(response)
+                  this.$router.push({path: '/'});
               });
 
               
-              console.log('envoie reussie');
+              // console.log('envoie reussie');
               e.preventDefault();
           }
           e.preventDefault();
           
       },
+      fetchEvent(id) {
+        this.$http.get('http://192.168.1.100:3333/ticket/edit/'+id)
+            .then(function(response){
+              this.Ticket.statut=response.body.data.statut
+              this.Ticket.qte=response.body.data.qte
+              this.Ticket.id=response.body.data.id
+              this.Ticket.prix=response.body.data.prix
+              this.Ticket.type_ticket_id=response.body.data.type_ticket_id
+              this.Ticket.event_id=response.body.data.event_id
+               console.log(response.body.data)
+          })
+      },
       fetchEventLier() {
         this.$http.get('http://192.168.1.100:3333/event/index')
             .then(function(response){
-              // this.eventLier = response.body.data.libelle
-              this.eventLier = response.body.data
+            //    this.eventLier = response.body.data.libelle
+               this.eventLier = response.body.data
                console.log(response.body.data)
           })
       },
@@ -155,9 +172,10 @@ export default {
       }
   },
   created: function() {
-    this.fetchEventLier();
-    this.fetchTypeLier();
-  }
+      this.fetchTypeLier(this.$route.params.id);
+      this.fetchEventLier(this.$route.params.id);
+      this.fetchEvent(this.$route.params.id);
+      this.UpdateEvent(this.$route.params.id);
+      }
 }
-
 </script>

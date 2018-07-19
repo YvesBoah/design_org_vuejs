@@ -13,6 +13,7 @@ import Typeticket from '@/components/Typeticket'
 import TypeticketVue from '@/components/TypeticketVue'
 import UpdateTypeTicket from '@/components/UpdateTypeTicket'
 import EventModify from '@/components/EventModify'
+import UpdateTicket from '@/components/UpdateTicket'
 
 Vue.use(Router)
 
@@ -87,6 +88,11 @@ export default new Router({
       path: '/EventModify/:id',
       name: 'EventModify',
       component: EventModify
+    },
+    {
+      path: '/UpdateTicket/:id',
+      name: 'UpdateTicket',
+      component: UpdateTicket
     }
   ]
 })

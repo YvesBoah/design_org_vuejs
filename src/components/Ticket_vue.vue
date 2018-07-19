@@ -16,28 +16,26 @@
                 <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Libellé</th>
-                  <th>description</th>
-                  <th>Lieu</th>
-                  <th>date_debut</th>
-                  <th>date_fin</th>
-                  <th>Type</th>
+                  <th>Prix</th>
+                  <th>Status</th>
+                  <th>Type_du_Ticket</th>
+                  <th>Evènement Lier</th>
+                  <th>Code Du Ticket</th>
                   <th>Modification</th>
-                  <th>Suppression</th>
+                  <th>Supression</th>
                 </tr>
                 </thead>
                 <tbody>
                 
-                <tr v-for="item in VueEvents" :key="item.id">
+                <tr v-for="item in Ticket_vue" :key="item.id">
                   <td>{{item.id}}</td>
-                  <td >{{item.libelle}}</td>
-                  <td >{{item.description}}</td>
-                  <td >{{item.lieu}}</td>
-                  <td >{{item.date_debut}}</td>
-                  <td >{{item.date_fin}}</td>
-                  <td >{{item.type}}</td>
-                <th><router-link :to="{name:'EventModify', params: {id: item.id}}"><button class="btn btn-primary">Modifier</button></router-link></th>
-                  <td><button v-on:click="DeleteEvent(item.id)" class="btn btn-danger">Supprimer</button></td>
+                  <td >{{item.prix}}</td>
+                  <td >{{item.statut}}</td>
+                  <td >{{item.typeTicket.libelle}}</td>
+                  <td >{{item.event.libelle}}</td>
+                  <td >***{{item.code}}</td>
+                <th><router-link :to="{name:'UpdateTicket', params: {id: item.id}}"><button class="btn btn-primary">Modifier</button></router-link></th>
+                  <td><button v-on:click="DeleteTicket(item.id)" class="btn btn-danger">Supprimer</button></td>
                 </tr>
                 
                 </tbody>
@@ -54,3 +52,36 @@
     </div>
 </template>
 
+<script>
+
+export default {
+  name: 'Ticket_vue',
+  data () {
+    return {
+        Ticket_vue: []
+    }
+  },
+  methods: {
+      FetchTicket() {
+        this.$http.get('http://192.168.1.100:3333/ticket/index')
+            .then(function(response){
+              this.Ticket_vue = response.body.data
+               console.log(response.body.data)
+          });
+      },
+    DeleteTicket(id){
+        this.$http.get('http://192.168.1.100:3333/ticket/delete/'+id)
+            .then(function(response){
+              this.Ticket_vue = response.body.data
+              //  this.$router.push({path:'/'});
+               location.reload()
+          });
+    }
+
+  },
+  created: function() {
+    this.FetchTicket(this.$route.params.id);
+  }
+}
+
+</script>
