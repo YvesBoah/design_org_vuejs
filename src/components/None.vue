@@ -1,6 +1,6 @@
 <template>
     <div class="None">
- <b></b>
+ <b>lol</b>
       
       
     </div>
@@ -9,6 +9,7 @@
 
 
 <script>
+
 export default {
 
 }

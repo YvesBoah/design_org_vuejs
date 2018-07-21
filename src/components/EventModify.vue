@@ -130,7 +130,7 @@ export default {
                   type : this.EventModify.type
               }
 
-              this.$http.post('http://192.168.1.100:3333/event/update/'+this.EventModify.id,UpdateEvents)
+              this.$http.post('http://192.168.1.103:3333/event/update/'+this.EventModify.id,UpdateEvents)
               .then(function(response){
                 console.log(response)
                   this.$router.push({path: '/'});
@@ -144,7 +144,7 @@ export default {
           
       },
       fetchEvent(id) {
-        this.$http.get('http://192.168.1.100:3333/event/edit/'+id)
+        this.$http.get('http://192.168.1.103:3333/event/edit/'+id)
             .then(function(response){
               this.EventModify.libelle=response.body.data.libelle
               this.EventModify.description=response.body.data.description

@@ -56,14 +56,14 @@ export default {
   },
   methods: {
       fetchTypeTicket() {
-        this.$http.get('http://192.168.1.100:3333/typeTicket/index')
+        this.$http.get('http://192.168.1.103:3333/typeTicket/index')
             .then(function(response){
               this.TypeTicket = response.body.data
                console.log(response.body.data)
           });
       },
     DeleteType(id){
-        this.$http.get('http://192.168.1.100:3333/typeTicket/delete/'+id)
+        this.$http.get('http://192.168.1.103:3333/typeTicket/delete/'+id)
             .then(function(response){
               this.TypeTicket = response.body.data
               //  this.$router.push({path:'/'});

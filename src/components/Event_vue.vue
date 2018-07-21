@@ -65,18 +65,21 @@ export default {
   },
   methods: {
       fetchEvent() {
-        this.$http.get('http://192.168.1.100:3333/event/index')
+        this.$http.get('http://192.168.1.103:3333/event/index')
             .then(function(response){
               this.VueEvents = response.body.data
                console.log(response.body.data)
           });
       },
     DeleteEvent(id){
-        this.$http.get('http://192.168.1.100:3333/event/delete/'+id)
+        this.$http.get('http://192.168.1.103:3333/event/delete/'+id)
             .then(function(response){
-              this.VueEvents = response.body.data
+             // on filtre les éléments pour lesquelles l'id est differents de ce qui est present
+              this.VueEvents = this.VueEvents.filter((elt)=>{
+                return  elt.id != id
+              })
               //  this.$router.push({path:'/'});
-               location.reload()
+              //  location.reload()
           });
     }
 

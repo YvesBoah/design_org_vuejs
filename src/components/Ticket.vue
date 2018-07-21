@@ -121,7 +121,7 @@ export default {
                   prix : this.Ticket.prix
               }
 
-              this.$http.post('http://192.168.1.100:3333/ticket/create',newTicket)
+              this.$http.post('http://192.168.1.101:3333/ticket/create',newTicket)
               .then(function(response){
                 console.log(response);
                   // this.$router.push({path: '/'});
@@ -138,7 +138,7 @@ export default {
           
       },
       fetchEventLier() {
-        this.$http.get('http://192.168.1.100:3333/event/index')
+        this.$http.get('http://192.168.1.103:3333/event/index')
             .then(function(response){
               // this.eventLier = response.body.data.libelle
               this.eventLier = response.body.data
@@ -146,7 +146,7 @@ export default {
           })
       },
       fetchTypeLier() {
-        this.$http.get('http://192.168.1.100:3333/typeTicket/index')
+        this.$http.get('http://192.168.1.103:3333/typeTicket/index')
             .then(function(response){
               //this.TypeLier = response.body.data.type
               this.TypeLier = response.body.data

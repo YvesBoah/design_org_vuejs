@@ -1,5 +1,8 @@
 <template>
-<div class="wrapper">
+  <!-- FIXE -->
+       <!-- FIXE -->
+       <!-- FIXE -->
+       <div class="wrapper">
 
 <div class="hello">
      
@@ -170,6 +173,11 @@
 </div>
 </div>
 </div>
+       <!-- FIXE -->
+       <!-- FIXE -->
+       <!-- FIXE -->
+
+      
 </template>
 
 <script>

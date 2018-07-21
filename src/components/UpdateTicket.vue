@@ -129,7 +129,7 @@ export default {
                   event_id : this.Ticket.event_id
               }
 
-              this.$http.post('http://192.168.1.100:3333/ticket/update/'+this.Ticket.id,UpdateEvents)
+              this.$http.post('http://192.168.1.101:3333/ticket/update/'+this.Ticket.id,UpdateEvents)
               .then(function(response){
                 console.log(response)
                   this.$router.push({path: '/'});
@@ -143,7 +143,7 @@ export default {
           
       },
       fetchEvent(id) {
-        this.$http.get('http://192.168.1.100:3333/ticket/edit/'+id)
+        this.$http.get('http://192.168.1.101:3333/ticket/edit/'+id)
             .then(function(response){
               this.Ticket.statut=response.body.data.statut
               this.Ticket.qte=response.body.data.qte
@@ -155,7 +155,7 @@ export default {
           })
       },
       fetchEventLier() {
-        this.$http.get('http://192.168.1.100:3333/event/index')
+        this.$http.get('http://192.168.1.103:3333/event/index')
             .then(function(response){
             //    this.eventLier = response.body.data.libelle
                this.eventLier = response.body.data
@@ -163,7 +163,7 @@ export default {
           })
       },
       fetchTypeLier() {
-        this.$http.get('http://192.168.1.100:3333/typeTicket/index')
+        this.$http.get('http://192.168.1.103:3333/typeTicket/index')
             .then(function(response){
               //this.TypeLier = response.body.data.type
               this.TypeLier = response.body.data

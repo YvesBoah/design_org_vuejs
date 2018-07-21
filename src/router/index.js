@@ -14,6 +14,8 @@ import TypeticketVue from '@/components/TypeticketVue'
 import UpdateTypeTicket from '@/components/UpdateTypeTicket'
 import EventModify from '@/components/EventModify'
 import UpdateTicket from '@/components/UpdateTicket'
+import MainLogin from '@/components/Layouts/MainLogin'
+import MainLayout from '@/components/Layouts/MainLayout'
 
 Vue.use(Router)
 
@@ -21,78 +23,90 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: '/Vendeur',
-      name: 'Vendeur',
-      component: Vendeur
-    },
-    {
-      path: '/Event',
-      name: 'Eventhot',
-      component: Eventhot
-    },
-    {
-      path: '/Ticket',
-      name: 'Ticket',
-      component: Ticket
-    },
-    {
-      path: '/Profil',
-      name: 'Profil',
-      component: Profil
+      path: '/Login',
+      name: 'MainLogin',
+      component: MainLogin
     },
     {
       path: '*',
       redirect: '/'
     },
     {
-      path: '/Statistique',
-      name: 'Statistique',
-      component: Statistique
-    },
-    {
-      path: '/None',
-      name: 'None',
-      component: None
-    },
-    {
-      path: '/Event_vue',
-      name: 'Event_vue',
-      component: Event_vue
-    },
-    {
-      path: '/Ticket_vue',
-      name: 'Ticket_vue',
-      component: Ticket_vue
-    },
-    {
-      path: '/Typeticket',
-      name: 'Typeticket',
-      component: Typeticket
-    },
-    {
-      path: '/TypeticketVue',
-      name: 'TypeticketVue',
-      component: TypeticketVue
-    },
-    {
-      path: '/UpdateTypeTicket/:id',
-      name: 'UpdateTypeTicket',
-      component: UpdateTypeTicket
-    },
-    {
-      path: '/EventModify/:id',
-      name: 'EventModify',
-      component: EventModify
-    },
-    {
-      path: '/UpdateTicket/:id',
-      name: 'UpdateTicket',
-      component: UpdateTicket
+      path: '/',
+      name: 'MainLayout',
+      component: MainLayout,
+      children: [
+        {
+          path: '/Acceuil',
+          name: 'HelloWorld',
+          component: HelloWorld
+        },
+        {
+          path: '/Vendeur',
+          name: 'Vendeur',
+          component: Vendeur
+        },
+        {
+          path: '/Event',
+          name: 'Eventhot',
+          component: Eventhot
+        },
+        {
+          path: '/Ticket',
+          name: 'Ticket',
+          component: Ticket
+        },
+        {
+          path: '/Profil',
+          name: 'Profil',
+          component: Profil
+        },
+        {
+          path: '/Statistique',
+          name: 'Statistique',
+          component: Statistique
+        },
+        {
+          path: '/N',
+          name: 'None',
+          component: None
+        },
+        {
+          path: '/Event_vue',
+          name: 'Event_vue',
+          component: Event_vue
+        },
+        {
+          path: '/Ticket_vue',
+          name: 'Ticket_vue',
+          component: Ticket_vue
+        },
+        {
+          path: '/Typeticket',
+          name: 'Typeticket',
+          component: Typeticket
+        },
+        {
+          path: '/TypeticketVue',
+          name: 'TypeticketVue',
+          component: TypeticketVue
+        },
+        {
+          path: '/UpdateTypeTicket/:id',
+          name: 'UpdateTypeTicket',
+          component: UpdateTypeTicket
+        },
+        {
+          path: '/EventModify/:id',
+          name: 'EventModify',
+          component: EventModify
+        },
+        {
+          path: '/UpdateTicket/:id',
+          name: 'UpdateTicket',
+          component: UpdateTicket
+        }
+      ]
     }
   ]
 })

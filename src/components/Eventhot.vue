@@ -122,7 +122,7 @@ export default {
                   type : this.Eventhot.type
               }
 
-              this.$http.post('http://192.168.1.100:3333/event/create',newEvent)
+              this.$http.post('http://192.168.1.103:3333/event/create',newEvent)
               .then(function(response){
                   this.$router.push({path: '/'});
               });

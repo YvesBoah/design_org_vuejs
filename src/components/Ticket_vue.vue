@@ -63,16 +63,19 @@ export default {
   },
   methods: {
       FetchTicket() {
-        this.$http.get('http://192.168.1.100:3333/ticket/index')
+        this.$http.get('http://192.168.1.103:3333/ticket/index')
             .then(function(response){
               this.Ticket_vue = response.body.data
                console.log(response.body.data)
           });
       },
     DeleteTicket(id){
-        this.$http.get('http://192.168.1.100:3333/ticket/delete/'+id)
+        this.$http.get('http://192.168.1.103:3333/ticket/delete/'+id)
             .then(function(response){
-              this.Ticket_vue = response.body.data
+              // this.Ticket_vue = response.body.data
+               this.Ticket_vue = this.Ticket_vue.filter((elt)=>{
+                return  elt.id != id
+              })
               //  this.$router.push({path:'/'});
                location.reload()
           });
