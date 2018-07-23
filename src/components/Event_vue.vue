@@ -22,6 +22,7 @@
                   <th>date_debut</th>
                   <th>date_fin</th>
                   <th>Type</th>
+                  <th>+ Voir les Tickets</th>
                   <th>Modification</th>
                   <th>Suppression</th>
                 </tr>
@@ -36,6 +37,8 @@
                   <td >{{item.date_debut}}</td>
                   <td >{{item.date_fin}}</td>
                   <td >{{item.type}}</td>
+               
+                <th><router-link :to="{name:'Ticket_vue', params: {id: item.id}}"><button class="btn btn-success">+ Voir</button></router-link></th>
                 <th><router-link :to="{name:'EventModify', params: {id: item.id}}"><button class="btn btn-primary">Modifier</button></router-link></th>
                   <td><button v-on:click="DeleteEvent(item.id)" class="btn btn-danger">Supprimer</button></td>
                 </tr>
@@ -65,14 +68,14 @@ export default {
   },
   methods: {
       fetchEvent() {
-        this.$http.get('http://192.168.1.103:3333/event/index')
+        this.$http.get('http://6bc1bde1.ngrok.io/event/index')
             .then(function(response){
               this.VueEvents = response.body.data
                console.log(response.body.data)
           });
       },
     DeleteEvent(id){
-        this.$http.get('http://192.168.1.103:3333/event/delete/'+id)
+        this.$http.get('http://6bc1bde1.ngrok.io/event/delete/'+id)
             .then(function(response){
              // on filtre les éléments pour lesquelles l'id est differents de ce qui est present
               this.VueEvents = this.VueEvents.filter((elt)=>{

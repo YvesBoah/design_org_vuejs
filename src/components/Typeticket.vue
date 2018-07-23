@@ -52,7 +52,7 @@ export default {
                   libelle : this.TicketCreate.libelle    
               }
 
-              this.$http.post('http://192.168.1.103:3333/typeTicket/create',createNewTicket)
+              this.$http.post('http://7dd250b7.ngrok.io/typeTicket/create',createNewTicket)
               .then(function(response){
                   this.$router.push({path: '/'});
               });

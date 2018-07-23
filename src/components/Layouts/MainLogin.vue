@@ -64,7 +64,7 @@ export default {
                   password : this.MainLogin.password
               }
 
-              this.$http.post('http://192.168.1.103:3333/user/login',Connecte_moi)
+              this.$http.post('http://7dd250b7.ngrok.io/user/login',Connecte_moi)
               .then(function(response){
                 
                 if (response.body.token) {
@@ -89,5 +89,6 @@ export default {
 <style>
  body{   
 background-image: url("../../../static/image/buzz.jpg");
+
 } 
 </style>

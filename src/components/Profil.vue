@@ -90,7 +90,7 @@ export default {
                   password : this.ProfilSubmit.password      
               }
 
-              this.$http.post('http://192.168.1.103:3333/',mise_a_jour_Profil)
+              this.$http.post('http://7dd250b7.ngrok.io/',mise_a_jour_Profil)
               .then(function(response){
                   this.$router.push({path: '/'});
               });

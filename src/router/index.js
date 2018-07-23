@@ -16,6 +16,7 @@ import EventModify from '@/components/EventModify'
 import UpdateTicket from '@/components/UpdateTicket'
 import MainLogin from '@/components/Layouts/MainLogin'
 import MainLayout from '@/components/Layouts/MainLayout'
+import list_vendeur from '@/components/list_vendeur'
 
 Vue.use(Router)
 
@@ -45,6 +46,11 @@ export default new Router({
           path: '/Vendeur',
           name: 'Vendeur',
           component: Vendeur
+        },
+        {
+          path: '/list_vendeur',
+          name: 'list_vendeur',
+          component: list_vendeur
         },
         {
           path: '/Event',
@@ -77,7 +83,7 @@ export default new Router({
           component: Event_vue
         },
         {
-          path: '/Ticket_vue',
+          path: '/event/:id/ticket',
           name: 'Ticket_vue',
           component: Ticket_vue
         },

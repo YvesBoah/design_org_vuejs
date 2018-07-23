@@ -18,24 +18,20 @@
                   <th>Id</th>
                   <th>Prix</th>
                   <th>Status</th>
-                  <th>Type_du_Ticket</th>
-                  <th>Evènement Lier</th>
                   <th>Code Du Ticket</th>
-                  <th>Modification</th>
-                  <th>Supression</th>
+                  <!-- <th>Modification</th>
+                  <th>Supression</th> -->
                 </tr>
                 </thead>
                 <tbody>
                 
                 <tr v-for="item in Ticket_vue" :key="item.id">
                   <td>{{item.id}}</td>
-                  <td >{{item.prix}}</td>
-                  <td >{{item.statut}}</td>
-                  <td >{{item.typeTicket.libelle}}</td>
-                  <td >{{item.event.libelle}}</td>
-                  <td >***{{item.code}}</td>
-                <th><router-link :to="{name:'UpdateTicket', params: {id: item.id}}"><button class="btn btn-primary">Modifier</button></router-link></th>
-                  <td><button v-on:click="DeleteTicket(item.id)" class="btn btn-danger">Supprimer</button></td>
+                  <td>{{item.prix}}</td>
+                  <td>{{item.statut}}</td>
+                  <td>{{item.code}}</td>
+                <!-- <th><router-link :to="{name:'UpdateTicket', params: {id: item.id}}"><button class="btn btn-primary">Modifier</button></router-link></th>
+                  <td><button v-on:click="DeleteTicket(item.id)" class="btn btn-danger">Supprimer</button></td> -->
                 </tr>
                 
                 </tbody>
@@ -62,22 +58,24 @@ export default {
     }
   },
   methods: {
-      FetchTicket() {
-        this.$http.get('http://192.168.1.103:3333/ticket/index')
+      FetchTicket(id) {
+        this.$http.get('http://6bc1bde1.ngrok.io/event/'+id+'/ticket')
             .then(function(response){
-              this.Ticket_vue = response.body.data
-               console.log(response.body.data)
+              this.Ticket_vue = response.body.data.tickets
+               console.log(response.body.data.tickets)
+               
           });
       },
     DeleteTicket(id){
-        this.$http.get('http://192.168.1.103:3333/ticket/delete/'+id)
+        this.$http.get('http://6bc1bde1.ngrok.io/ticket/delete/'+id)
             .then(function(response){
+              console.log(response)
               // this.Ticket_vue = response.body.data
                this.Ticket_vue = this.Ticket_vue.filter((elt)=>{
                 return  elt.id != id
               })
               //  this.$router.push({path:'/'});
-               location.reload()
+              //  location.reload()
           });
     }
 

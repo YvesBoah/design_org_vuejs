@@ -52,7 +52,7 @@ export default {
                   libelle : this.TicketUpdate.libelle    
               }
 
-              this.$http.post('http://192.168.1.103:3333/typeTicket/update/'+this.TicketUpdate.id,UpdateThisTicket)
+              this.$http.post('http://7dd250b7.ngrok.io/typeTicket/update/'+this.TicketUpdate.id,UpdateThisTicket)
               .then(function(response){
                   this.$router.push({path: '/'});
               });
@@ -65,7 +65,7 @@ export default {
           
       },
       fetchType(id) {
-        this.$http.get('http://192.168.1.103:3333/typeTicket/edit/'+id)
+        this.$http.get('http://7dd250b7.ngrok.io/typeTicket/edit/'+id)
             .then(function(response){
               this.TicketUpdate.libelle=response.body.data.libelle
               this.TicketUpdate.id=id

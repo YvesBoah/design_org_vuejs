@@ -125,8 +125,8 @@
             </a>
             <ul class="treeview-menu">
               <li class="active"><router-link :to="{name:'Event_vue'}"><i class="fa fa-circle-o"></i>Liste des évènements</router-link></li>
-              <li><router-link :to="{name:'Ticket_vue'}"><i class="fa fa-circle-o"></i> Liste Des tickets Générer</router-link></li>
               <li><router-link :to="{name:'TypeticketVue'}"><i class="fa fa-circle-o"></i> Liste Des types de ticket </router-link></li>
+              <li class="active"><router-link :to="{name:'list_vendeur'}"><i class="fa fa-circle-o"></i>Liste des Vendeurs</router-link></li>
               <li><router-link :to="{name:'Statistique'}"><i class="fa fa-circle-o"></i> Statistique Comptabilité </router-link></li>
             </ul>
           </li>   
